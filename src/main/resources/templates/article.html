@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글 내용</title>
+</head>
+<body>
+<div class="p-5 mb-5 text-center bg-light">
+  <h1 class="mb-3">My Blog</h1>
+  <h4 class="mb-3">블로그에 오신 것을 환영합니다.</h4>
+</div>
+
+<div>
+  <input type="hidden" id="article-id" th:value="${article.id}">
+  <h1 th:text="${article.title}">제목</h1>
+  <div th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')} By ${article.author}|"></div>
+  <p th:text="${article.content}"></p>
+  <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|">수정</button>
+  <button type="button" id="delete-btn">삭제</button>
+</div>
+
+<script src="/js/article.js"></script>
+</body>
+</html>
