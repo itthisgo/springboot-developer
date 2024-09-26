@@ -32,6 +32,10 @@ dependencies { //프로젝트에 필요한 의존 라이브러리
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
+jar {
+    enabled = false
+}
+
 test {
     useJUnitPlatform()
 }
