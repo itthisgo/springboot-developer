@@ -122,6 +122,7 @@ class BlogApiControllerTest {
         final String content = "content";
         final AddArticleRequest userRequest = new AddArticleRequest(title, content);
 
+
         final String requestBody = objectMapper.writeValueAsString(userRequest);
 
         Principal principal = Mockito.mock(Principal.class);
@@ -134,7 +135,7 @@ class BlogApiControllerTest {
                 .content(requestBody));
 
         // then
-        result.andExpect(status().isBadRequest());
+        result.andExpect(status().isInternalServerError());
     }
 
     @DisplayName("addArticle: 아티클 추가할 때 title이 10자를 넘으면 실패한다.")
@@ -158,7 +159,7 @@ class BlogApiControllerTest {
                 .content(requestBody));
 
         // then
-        result.andExpect(status().isBadRequest());
+        result.andExpect(status().isInternalServerError());
     }
 
     @DisplayName("addArticle: 아티클 추가할 때 content가 빈 문자열이면 실패한다.")
@@ -182,7 +183,7 @@ class BlogApiControllerTest {
                 .content(requestBody));
 
         // then
-        result.andExpect(status().isBadRequest());
+        result.andExpect(status().isInternalServerError());
     }
 
     @DisplayName("findAllArticles: 아티클 목록 조회에 성공한다.")

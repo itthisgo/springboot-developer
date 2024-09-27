@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed77926f-7f5c-43ee-a8ce-2b424636001a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/config/error/exception/NotFoundExcption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/dto/AddCommentRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/dto/AddCommentResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/controller/BlogApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/controller/BlogApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/domain/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/domain/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/dto/ArticleViewResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/dto/ArticleViewResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ithotgi/springbootdeveloper/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/article.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/article.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/ithotgi/springbootdeveloper/controller/BlogApiControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ithotgi/springbootdeveloper/controller/BlogApiControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +79,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.BlogApiControllerTest.addArticleContentValidation.executor": "Run",
+    "Gradle.BlogApiControllerTest.addArticleNullValidation.executor": "Run",
     "Gradle.BlogApiControllerTest.addComment.executor": "Run",
     "Gradle.BlogApiControllerTest.executor": "Run",
     "Gradle.BlogApiControllerTest.findArticleInvalidArticle.executor": "Run",
@@ -102,7 +91,7 @@
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.BlogApiControllerTest.addArticleNullValidation">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ithotgi.springbootdeveloper.Main" />
       <module name="springboot-developer.main" />
@@ -116,7 +105,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BlogApiControllerTest.addArticleContentValidation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BlogApiControllerTest.addArticleNullValidation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -129,7 +118,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.ithotgi.springbootdeveloper.controller.BlogApiControllerTest.addArticleContentValidation&quot;" />
+            <option value="&quot;com.ithotgi.springbootdeveloper.controller.BlogApiControllerTest.addArticleNullValidation&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -214,11 +203,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BlogApiControllerTest.addArticleNullValidation" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.BlogApiControllerTest.addComment" />
         <item itemvalue="Gradle.BlogApiControllerTest.findArticleInvalidArticle" />
         <item itemvalue="Gradle.BlogApiControllerTest.invalidHttpMethod" />
-        <item itemvalue="Gradle.BlogApiControllerTest.addArticleContentValidation" />
       </list>
     </recent_temporary>
   </component>
