@@ -152,6 +152,30 @@ class BlogApiControllerTest {
         result.andExpect(status().isBadRequest());
     }
 
+    @DisplayName("addArticle: 아티클 추가할 때 content가 빈 문자열이면 실패한다.")
+    @Test
+    public void addArticleContentValidation() throws Exception {
+        // given
+        final String url = "/api/articles";
+        final String title = "title"; // 직접 생성
+        final String content = "";
+        final AddArticleRequest userRequest = new AddArticleRequest(title, content);
+
+        final String requestBody = objectMapper.writeValueAsString(userRequest);
+
+        Principal principal = Mockito.mock(Principal.class);
+        Mockito.when(principal.getName()).thenReturn("username");
+
+        // when
+        ResultActions result = mockMvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .principal(principal)
+                .content(requestBody));
+
+        // then
+        result.andExpect(status().isBadRequest());
+    }
+
     @DisplayName("findAllArticles: 아티클 목록 조회에 성공한다.")
     @Test
     public void findAllArticles() throws Exception {
