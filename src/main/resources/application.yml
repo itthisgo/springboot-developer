@@ -9,8 +9,7 @@ spring:
     defer-datasource-initialization: true
 
   datasource:
-    url: clear
-
+    url: jdbc:h2:mem:testdb
 
   h2:
     console:
@@ -21,8 +20,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: test
+            client-secret: test
             scope:
               - email
               - profile

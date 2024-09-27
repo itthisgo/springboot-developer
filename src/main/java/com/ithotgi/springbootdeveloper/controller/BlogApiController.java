@@ -1,9 +1,8 @@
 package com.ithotgi.springbootdeveloper.controller;
 
 import com.ithotgi.springbootdeveloper.domain.Article;
-import com.ithotgi.springbootdeveloper.dto.AddArticleRequest;
-import com.ithotgi.springbootdeveloper.dto.ArticleResponse;
-import com.ithotgi.springbootdeveloper.dto.UpdateArticleRequest;
+import com.ithotgi.springbootdeveloper.domain.Comment;
+import com.ithotgi.springbootdeveloper.dto.*;
 import com.ithotgi.springbootdeveloper.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +61,13 @@ public class BlogApiController {
         Article updateArticle = blogService.update(id, request);
 
         return ResponseEntity.ok().body(updateArticle);
+    }
+
+    @PostMapping("/api/comments")
+    public ResponseEntity<AddCommentResponse> addComment(@RequestBody AddCommentRequest request, Principal principal){
+        Comment savedComment = blogService.addComment(request, principal.getName());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new AddCommentResponse(savedComment));
     }
 
 }

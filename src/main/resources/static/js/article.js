@@ -156,3 +156,28 @@ function httpRequest(method, url, body, success, fail) {
         }
     });
 }
+
+//댓글 생성
+const commentCreateButton = document.getElementById("comment-create-btn");
+
+if(commentCreateButton){
+    commentCreateButton.addEventListener('click', e => {
+        articleId = document.getElementById('article-id').value;
+        body = JSON.stringify({
+            articleId: articleId,
+            content: document.getElementById('content').value
+        });
+        function success(){
+            alert('댓글이 등록되었습니다.');
+            location.replace('/articles/' + articleId);
+        };
+        function fail(){
+            alert('댓글 등록 실패');
+            location.replace('/articles/' + articleId);
+        };
+
+        httpRequest('POST', '/api/comments', body, success, fail);
+
+
+    })
+}

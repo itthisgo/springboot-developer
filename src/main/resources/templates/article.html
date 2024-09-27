@@ -17,7 +17,17 @@
   <p th:text="${article.content}"></p>
   <button type="button" id="modify-btn" th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|">수정</button>
   <button type="button" id="delete-btn">삭제</button>
-</div>
+
+  <hr>
+  <div>
+    <h5>댓글 추가</h5>
+    <div><textarea id="content" rows="3"></textarea></div>
+    <button type="button" id="comment-create-btn">댓글 추가</button>
+  </div>
+  <div th:each="comment : ${article.comments}">
+    <div th:text="|Commented on ${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')} By ${comment.author}|"></div>
+    <p th:text="${comment.content}"></p>
+  </div>
 
 <script src="/js/article.js"></script>
 </body>

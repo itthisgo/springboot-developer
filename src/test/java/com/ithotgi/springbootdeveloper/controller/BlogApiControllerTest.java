@@ -1,11 +1,15 @@
 package com.ithotgi.springbootdeveloper.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ithotgi.springbootdeveloper.config.error.ErrorCode;
 import com.ithotgi.springbootdeveloper.domain.Article;
+import com.ithotgi.springbootdeveloper.domain.Comment;
 import com.ithotgi.springbootdeveloper.domain.User;
 import com.ithotgi.springbootdeveloper.dto.AddArticleRequest;
+import com.ithotgi.springbootdeveloper.dto.AddCommentRequest;
 import com.ithotgi.springbootdeveloper.dto.UpdateArticleRequest;
 import com.ithotgi.springbootdeveloper.repository.BlogRepository;
+import com.ithotgi.springbootdeveloper.repository.CommentRepository;
 import com.ithotgi.springbootdeveloper.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +32,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -51,6 +56,9 @@ class BlogApiControllerTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     User user;
 
     @BeforeEach
@@ -58,6 +66,7 @@ class BlogApiControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .build();
         blogRepository.deleteAll();
+        commentRepository.deleteAll();
     }
 
 
@@ -256,6 +265,71 @@ class BlogApiControllerTest {
         assertThat(article.getTitle()).isEqualTo(newTitle);
         assertThat(article.getContent()).isEqualTo(newContent);
     }
+
+    @DisplayName("요청 메서드 에러")
+    @Test
+    public void invalidHttpMethod() throws Exception{
+        final String url = "/api/articles/{id}";
+
+        final ResultActions resultActions = mockMvc.perform(post(url, 1));
+
+        resultActions
+                .andDo(print())
+                .andExpect(status().isMethodNotAllowed())
+                .andExpect(jsonPath("$.message").value(ErrorCode.METHOD_NOT_ALLOWED.getMessage()));
+                //.andExpect(jsonPath("$.code").value(ErrorCode.ARTICLE_NOT_FOUND.getCode()));
+    }
+
+    @DisplayName("없는 게시글 요청 실패")
+    @Test
+    public void findArticleInvalidArticle() throws Exception{
+        final String url = "/api/articles/{id}";
+        final long invalidId = 1;
+
+        final ResultActions resultActions = mockMvc.perform(get(url, invalidId));
+
+        resultActions
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value(ErrorCode.ARTICLE_NOT_FOUND.getMessage()))
+                .andExpect(jsonPath("$.code").value(ErrorCode.ARTICLE_NOT_FOUND.getCode()));
+    }
+
+    @DisplayName("댓글 추가 성공")
+    @Test
+    public void addComment() throws Exception{
+        //given
+        final String url = "/api/comments";
+
+        Article savedArticle = createDefaultArticle();
+        final Long articleId = savedArticle.getId();
+        final String content = "content";
+        final AddCommentRequest userCommentRequest = new AddCommentRequest(articleId, content);
+        final String requestBody = objectMapper.writeValueAsString(userCommentRequest);
+
+        Principal principal = Mockito.mock(Principal.class);
+        Mockito.when(principal.getName()).thenReturn("username");
+
+        // when
+        ResultActions result = mockMvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .principal(principal)
+                .content(requestBody)
+        );
+
+        //then
+        result.andExpect(status().isCreated());
+
+        List<Comment> comments = commentRepository.findAll();
+
+        assertThat(comments.size()).isEqualTo(1);
+        assertThat(comments.get(0).getArticle().getId()).isEqualTo(articleId);
+        assertThat(comments.get(0).getContent()).isEqualTo(content);
+
+    }
+
+
+
 
     private Article createDefaultArticle() {
         return blogRepository.save(Article.builder()
